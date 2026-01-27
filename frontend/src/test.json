@@ -1,0 +1,11 @@
+{ 
+    "employees": [
+        {"name": "Jerry", "ID": "001", "Lead": "n/a"},
+        {"name": "Pops","ID": "002","Lead": "n/a"},
+        {"name": "Jack","ID": "003","Lead": "Jerry"},
+        {"name": "Jill","ID": "004","Lead": "Jerry"},
+        {"name": "Mordecai","ID": "005","Lead": "Pops"},
+        {"name": "Rigby","ID": "006","Lead": "Pops"},
+        {"name": "Tim","ID": "007","Lead": "Mordecai"}
+    ]
+}
