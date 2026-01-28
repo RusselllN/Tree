@@ -1,9 +1,9 @@
 import { Position, Handle } from "@xyflow/react";
 
-export function EmployeeOptions() {
+export function EmployeeOptions({id, data}) {
   return (
     <div className="button-person">
-      <div className="border rounded-lg px-15 py-2">
+      <div className="border rounded-lg px-10 py-2">
         <button onClick={() => alert(1)}>Jerry</button>
       </div>
       <button onClick={() => alert(2)}>Add Child</button>
