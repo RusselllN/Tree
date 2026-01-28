@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { Position, Handle } from '@xyflow/react';
+import { Position, Handle } from '@xyflow/react'; // for connecting nodes
  
 const initialNodes = [
   { id: 'n1', type: 'employee', position: { x: 0, y: 0 }, data: { label: 'Jerry' } },
@@ -15,6 +15,7 @@ const initialEdges = [
   { id: 'n1-n4', source: 'n1', target: 'n4' }
 ];
 
+// example node connector syntax
 export function TextUpdaterNode(props) {
   const onChange = useCallback((evt) => {
     console.log(evt.target.value);
@@ -30,6 +31,7 @@ export function TextUpdaterNode(props) {
   );
 }
 
+// Employee Nodes
 export function EmployeeOptions() {
   const onNodesChange = useCallback(
     (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
@@ -45,7 +47,9 @@ export function EmployeeOptions() {
   );
   return(
     <div className='button-person'>
-      <div className="hover"><button onClick={() => alert(1)}>Jerry</button></div>
+      <div className="border rounded-lg px-15 py-2">
+        <button onClick={() => alert(1)}>Jerry</button>
+      </div>
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
     </div>
@@ -55,11 +59,14 @@ export function EmployeeOptions() {
 
 
 
+
+
+// Build Nodes
 export default function App() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
   
-  
+  // custom node types
   const nodeTypes = {
     textUpdater: TextUpdaterNode,
     employee: EmployeeOptions,
