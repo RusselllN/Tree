@@ -2,13 +2,15 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Dispatch, SetStateAction } from "react";
-import { createEmployee } from "../actions/people";
+import { useStore } from "../actions/store";
 interface NewMemberProps {
   leaderID: string;
   setAddMember: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
+  const createConnectedNode = useStore((state) => state.createConnectedNode);
+
   const schema = z.object({
     name: z.string().min(1, "Name is required"),
     id: z.string().min(1, "ID is required"),
@@ -27,9 +29,8 @@ export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
   });
 
   const addMember = async (data: z.infer<typeof schema>) => {
-    setAddMember(false)
-    console.log(data)
-    createEmployee(data.id, 'employee', { label: data.name });
+    createConnectedNode('employee', data.name, leaderID);
+    setAddMember(false);
   }
 
   return (

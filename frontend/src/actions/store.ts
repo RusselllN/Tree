@@ -31,6 +31,7 @@ export interface StoreState {
   removeNodes: (nodes: AppNode[]) => void;
   addEdge: (data: Connection) => void;
   createNode: (type: string) => void;
+  createConnectedNode: (type: string, label: string, parentId: string) => void;
 }
 
 export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
@@ -84,5 +85,28 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
       nodes: get().nodes.filter((n) => !nodeIds.includes(n.id)),
       edges: get().edges.filter((e) => !nodeIds.includes(e.source) && !nodeIds.includes(e.target)),
     });
+  },
+
+  createConnectedNode(type: string, label: string, parentId: string) {
+    const id = nanoid();
+    const edgeId = nanoid(6);
+
+    // Find parent node to position the new node below it
+    const parentNode = get().nodes.find((n) => n.id === parentId);
+    const position = parentNode
+      ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
+      : { x: 50, y: 50 };
+
+    const data: NodeData = { label };
+
+    createEmployee(id, type, data);
+    
+    // Create the new node and edge connecting it to the parent
+    set({
+      nodes: [...get().nodes, { id, type, data, position }],
+      edges: [...get().edges, { id: edgeId, source: parentId, target: id }],
+    });
+
+    connectEmployee(parentId, id);
   }
 }));

@@ -18,7 +18,7 @@ const selector = (id: string) => (store: StoreState) => ({
 });
 
 // Create node
-export function createEmployee(id: string, type: string, data: {label: string}): void {
+export function createEmployee(id: string, type: string, data: NodeData): void {
   const node = new Map<string, unknown>();
 
   node.set(id, node);
