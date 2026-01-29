@@ -1,16 +1,14 @@
 
-import { useState, useCallback } from 'react';
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Background, Panel} from '@xyflow/react';
+import { ReactFlow, Background, Panel} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import { EmployeeOptions } from './nodes/EmployeeOptions';
-import { Position, Handle } from '@xyflow/react'; // for connecting nodes
 
 import { shallow } from 'zustand/shallow';
-import { useStore } from './store.js';
+import { useStore, type StoreState } from './actions/store.js';
 
 // store node data
-const selector = (store) => ({
+const selector = (store: StoreState) => ({
   nodes: store.nodes,
   edges: store.edges,
   onNodesChange: store.onNodesChange,

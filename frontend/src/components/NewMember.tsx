@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Dispatch, SetStateAction } from "react";
+import { createEmployee } from "../actions/people";
 interface NewMemberProps {
   leaderID: string;
   setAddMember: Dispatch<SetStateAction<boolean>>;
@@ -28,7 +29,7 @@ export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
   const addMember = async (data: z.infer<typeof schema>) => {
     setAddMember(false)
     console.log(data)
-    
+    createEmployee(data.id, 'employee', { label: data.name });
   }
 
   return (
