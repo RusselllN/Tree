@@ -44,10 +44,10 @@ export interface StoreState {
 
 export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
   nodes: [ // dummy nodes
-    { id: 'n1', type: 'employee', position: { x: 1000, y: 100 }, data: { name: 'Jerry', id: '00001' } },
-    { id: 'n2', type: 'employee', position: { x: 1000, y: 300 }, data: { name: 'Jack', id: '00002' } },
-    { id: 'n3', type: 'employee', position: { x: 1250, y: 300 }, data: { name: 'Jill', id: '00003' } },
-    { id: 'n4', type: 'employee', position: { x: 750, y: 300 }, data: { name: 'Supercalifragalisticexpialidocious', id: '00004' } },
+    { id: 'n1', type: 'employee', position: { x: 1000, y: 100 }, data: { name: 'Jerry', id: '00001', level: '1', testdate: 'tomorrow' } },
+    { id: 'n2', type: 'employee', position: { x: 1000, y: 300 }, data: { name: 'Jack', id: '00002', level: '1', testdate: 'tomorrow' } },
+    { id: 'n3', type: 'employee', position: { x: 1250, y: 300 }, data: { name: 'Jill', id: '00003', level: '1', testdate: 'tomorrow' } },
+    { id: 'n4', type: 'employee', position: { x: 750, y: 300 }, data: { name: 'Supercalifragalisticexpialidocious', id: '00004', level: '1', testdate: 'tomorrow' } },
   ],
   edges: [
     { id: 'n1-n2', source: 'n1', target: 'n2' },
@@ -81,7 +81,7 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
   createNode(type: string) {
     const id = nanoid();
 
-    const data: NodeData = { name: 'are you' };
+    const data: NodeData = { name: 'this', id: '1', level: '1', testdate: '1' };
     const position = { x: 50, y: 50 };
 
     createEmployee(id, type, data);
@@ -105,7 +105,7 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
       ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
       : { x: 50, y: 50 };
 
-    const data: NodeData = { name };
+    const data: NodeData = { name, id: '1', level: '1', testdate: '1' };
 
     createEmployee(id, type, data);
     

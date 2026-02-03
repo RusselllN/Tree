@@ -1,8 +1,12 @@
 // logic for making new nodes maybe
 
 interface NodeData {
-  frequency?: number;
-  type?: string;
+  // frequency?: number;
+  // type?: string;
+  name: string;
+  id: string;
+  level: string;
+  testdate: string;
 }
 
 interface StoreState {
@@ -13,8 +17,12 @@ const context = new AudioContext();
 const nodes = new Map<string, AudioNode>();
 
 const selector = (id: string) => (store: StoreState) => ({
-  setFrequency: (e: React.ChangeEvent<HTMLInputElement>) => store.updateNode(id, { frequency: +e.target.value }),
-  setType: (e: React.ChangeEvent<HTMLSelectElement>) => store.updateNode(id, { type: e.target.value }),
+  // setFrequency: (e: React.ChangeEvent<HTMLInputElement>) => store.updateNode(id, { frequency: +e.target.value }),
+  // setType: (e: React.ChangeEvent<HTMLSelectElement>) => store.updateNode(id, { type: e.target.value }),
+  setName: (e: React.ChangeEvent<HTMLSelectElement>) => store.updateNode(id, { name: e.target.value }),
+  setID: (e: React.ChangeEvent<HTMLSelectElement>) => store.updateNode(id, { id: e.target.value }),
+  setLevel: (e: React.ChangeEvent<HTMLSelectElement>) => store.updateNode(id, { level: e.target.value }),
+  setTestDate: (e: React.ChangeEvent<HTMLSelectElement>) => store.updateNode(id, { testdate: e.target.value }),
 });
 
 // Create node
