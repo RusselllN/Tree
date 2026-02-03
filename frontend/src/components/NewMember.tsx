@@ -36,19 +36,45 @@ export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
   return (
     <form
       onSubmit={form.handleSubmit(addMember)}
-      className="flex flex-col max-w-sm absolute right-0 top-0"
+      // className="flex flex-col max-w-sm absolute left-0 top-0 px-30"
+      className="flex flex-col max-w-sm absolute left-0 top-0 py-13"
     >
-      <label htmlFor="name">Name:</label>
+      <div className="border rounded-lg">
+        <div>
+          <label className="px-2" htmlFor="name">Name:</label>
+          <input {...form.register("name")} type="text" id="name" name="name" />
+          {form.formState.errors.name && (
+            <p className="text-red-500">{form.formState.errors.name.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="px-2" htmlFor="id">ID:</label>
+          <input {...form.register("id")} type="text" id="id" name="id" />
+          {form.formState.errors.id && (
+            <p className="text-red-500">{form.formState.errors.id.message}</p>
+          )}
+        </div>
+
+        <div className="flex flex-col">
+          <input className="" type="submit" value="Submit" />
+        </div>
+      </div>
+
+      {/* <div className="border rounded-lg">
+      <label className="px-2" htmlFor="name">Name:</label>
       <input {...form.register("name")} type="text" id="name" name="name" />
       {form.formState.errors.name && (
         <p className="text-red-500">{form.formState.errors.name.message}</p>
       )}
-      <label htmlFor="id">ID:</label>
+      <label className="px-2" htmlFor="id">ID:</label>
       <input {...form.register("id")} type="text" id="id" name="id" />
       {form.formState.errors.id && (
         <p className="text-red-500">{form.formState.errors.id.message}</p>
       )}
+      <div className="px-16">
       <input type="submit" value="Submit" />
+      </div> */}
       {/* <label htmlFor="leader">Leader:</label> */}
       {/* <input
         {...form.register("leader")}
@@ -59,6 +85,7 @@ export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
       {form.formState.errors.leader && (
         <p className="text-red-500">{form.formState.errors.leader.message}</p>
       )} */}
+      
     </form>
   );
 }
