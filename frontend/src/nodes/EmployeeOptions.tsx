@@ -4,7 +4,7 @@ import NewMember from "../components/NewMember";
 
 interface EmployeeOptionsProps {
   id: string;
-  data: { label: string };
+  data: { label: string, id: string, level: string, testdate: string };
 }
 
 export function EmployeeOptions({ id, data }: EmployeeOptionsProps) {

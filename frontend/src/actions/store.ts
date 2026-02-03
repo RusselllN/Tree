@@ -15,8 +15,15 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { EmployeeOptions } from '../nodes/EmployeeOptions';
 import { connectEmployee, createEmployee } from './people';
 
+// name: Person's name
+// id: 5 letters or numbers 
+// level: commission level (rep, dist, div)
+// testdate: next day person will take test
 export type NodeData = {
-  label: string;
+  name: string;
+  id: string;
+  level: string;
+  testdate: string;
 };
 
 export type AppNode = Node<NodeData>;
@@ -31,15 +38,16 @@ export interface StoreState {
   removeNodes: (nodes: AppNode[]) => void;
   addEdge: (data: Connection) => void;
   createNode: (type: string) => void;
-  createConnectedNode: (type: string, label: string, parentId: string) => void;
+  createConnectedNode: (type: string, name: string, parentId: string) => void;
 }
+
 
 export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
   nodes: [ // dummy nodes
-    { id: 'n1', type: 'employee', position: { x: 1000, y: 100 }, data: { label: 'Jerry' } },
-    { id: 'n2', position: { x: 1000, y: 300 }, data: { label: 'Jack' } },
-    { id: 'n3', position: { x: 1250, y: 300 }, data: { label: 'Jill' } },
-    { id: 'n4', position: { x: 750, y: 300 }, data: { label: 'Supercalifragalisticexpialidocious' } },
+    { id: 'n1', type: 'employee', position: { x: 1000, y: 100 }, data: { name: 'Jerry', id: '00001' } },
+    { id: 'n2', type: 'employee', position: { x: 1000, y: 300 }, data: { name: 'Jack', id: '00002' } },
+    { id: 'n3', type: 'employee', position: { x: 1250, y: 300 }, data: { name: 'Jill', id: '00003' } },
+    { id: 'n4', type: 'employee', position: { x: 750, y: 300 }, data: { name: 'Supercalifragalisticexpialidocious', id: '00004' } },
   ],
   edges: [
     { id: 'n1-n2', source: 'n1', target: 'n2' },
@@ -73,7 +81,7 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
   createNode(type: string) {
     const id = nanoid();
 
-    const data: NodeData = { label: 'are you' };
+    const data: NodeData = { name: 'are you' };
     const position = { x: 50, y: 50 };
 
     createEmployee(id, type, data);
@@ -87,7 +95,7 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
     });
   },
 
-  createConnectedNode(type: string, label: string, parentId: string) {
+  createConnectedNode(type: string, name: string, parentId: string) {
     const id = nanoid();
     const edgeId = nanoid(6);
 
@@ -97,7 +105,7 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
       ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
       : { x: 50, y: 50 };
 
-    const data: NodeData = { label };
+    const data: NodeData = { name };
 
     createEmployee(id, type, data);
     
