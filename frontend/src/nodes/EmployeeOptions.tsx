@@ -16,7 +16,7 @@ export function EmployeeOptions({ id, data }: EmployeeOptionsProps) {
       {addMember && <NewMember leaderID={id} setAddMember={setAddMember} />}
       <div className="button-person relative">
         <div className="border rounded-lg px-10 py-2">
-          <button onClick={() => MemberMenu(data)}></button>
+          {/* <button className={`${handleMenu}`} onClick={() => handleMenu(data)}>{data.name}</button> */}
           {data.name}
         </div>
         <button

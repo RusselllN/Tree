@@ -1,5 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react"
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+// import type { Dispatch, SetStateAction } from "react";
+import { useState } from 'react';
 
 interface MemberMenuProps {
   name: string;
@@ -9,6 +11,12 @@ interface MemberMenuProps {
 }
 
 export default function MemberMenu(data: MemberMenuProps){
+  const [showMenu, setShowMenu] = useState(false);
+
+  function handleMenu() {
+    setShowMenu(!showMenu);
+  }
+
   return(
     <Menu as="div" className="relative inline-block">
       <MenuButton>
