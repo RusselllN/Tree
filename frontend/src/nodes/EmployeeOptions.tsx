@@ -16,8 +16,14 @@ export function EmployeeOptions({ id, data }: EmployeeOptionsProps) {
       {addMember && <NewMember leaderID={id} setAddMember={setAddMember} />}
       <div className="button-person relative">
         <div className="border rounded-lg px-10 py-2">
-          {/* <button className={`${handleMenu}`} onClick={() => handleMenu(data)}>{data.name}</button> */}
-          {data.name}
+         
+          <MemberMenu
+            name={data.name}
+            id={data.id}
+            level={data.level}
+            testdate={data.testdate}
+            setShowMenu={() => {}}
+          />
         </div>
         <button
           className={`${addMember && "rotate-45"} transition-all absolute top-0 right-2 text-sm`}
