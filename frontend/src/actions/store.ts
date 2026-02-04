@@ -38,7 +38,7 @@ export interface StoreState {
   removeNodes: (nodes: AppNode[]) => void;
   addEdge: (data: Connection) => void;
   createNode: (type: string) => void;
-  createConnectedNode: (type: string, name: string, parentId: string) => void;
+  createConnectedNode: (type: string, name: string, id: string, level: string | undefined, testdate: string | undefined, parentId: string) => void;
 }
 
 
@@ -95,8 +95,8 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
     });
   },
 
-  createConnectedNode(type: string, name: string, parentId: string) {
-    const id = nanoid();
+  createConnectedNode(type: string, name: string, id: string, level: string | undefined, testdate: string | undefined, parentId: string) {
+    // const id = nanoid();
     const edgeId = nanoid(6);
 
     // Find parent node to position the new node below it
@@ -105,7 +105,9 @@ export const useStore = createWithEqualityFn<StoreState>((set, get) => ({
       ? { x: parentNode.position.x, y: parentNode.position.y + 200 }
       : { x: 50, y: 50 };
 
-    const data: NodeData = { name, id: '1', level: '1', testdate: '1' };
+    if (!level) { level = "-1"};
+    if (!testdate) {testdate = "n/a"}
+    const data: NodeData = { name, id, level, testdate };
 
     createEmployee(id, type, data);
     

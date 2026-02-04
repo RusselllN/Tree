@@ -14,12 +14,16 @@ export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
   const schema = z.object({
     name: z.string().min(1, "Name is required"),
     id: z.string().min(1, "ID is required"),
+    level: z.string().optional(),
+    testdate: z.string().optional(),
     leader: z.string().min(1, "Leader is required"),
   });
 
   const defaultValues: z.infer<typeof schema> = {
     name: "",
     id: "",
+    level: "1",
+    testdate: "n/a",
     leader: leaderID,
   };
 
@@ -29,7 +33,7 @@ export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
   });
 
   const addMember = async (data: z.infer<typeof schema>) => {
-    createConnectedNode('employee', data.name, leaderID);
+    createConnectedNode('employee', data.name, data.id, data.level, data.testdate, leaderID);
     setAddMember(false);
   }
 
@@ -51,6 +55,14 @@ export default function NewMember({ leaderID, setAddMember }: NewMemberProps) {
         <div>
           <label className="px-2" htmlFor="id">ID:</label>
           <input {...form.register("id")} type="text" id="id" name="id" />
+          {form.formState.errors.id && (
+            <p className="text-red-500">{form.formState.errors.id.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="px-2" htmlFor="id">Level:</label>
+          <input {...form.register("level")} type="text" id="id" name="id" />
           {form.formState.errors.id && (
             <p className="text-red-500">{form.formState.errors.id.message}</p>
           )}

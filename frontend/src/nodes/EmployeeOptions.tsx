@@ -22,9 +22,9 @@ export function EmployeeOptions({ id, data }: EmployeeOptionsProps) {
             id={data.id}
             level={data.level}
             testdate={data.testdate}
-            setShowMenu={() => {}}
           />
         </div>
+
         <button
           className={`${addMember && "rotate-45"} transition-all absolute top-0 right-2 text-sm`}
           onClick={() => setAddMember(!addMember)}

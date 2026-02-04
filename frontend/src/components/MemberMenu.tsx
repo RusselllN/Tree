@@ -1,5 +1,5 @@
 import { Menu, MenuButton } from "@headlessui/react";
-import type { Dispatch, SetStateAction } from "react";
+// import type { Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 
 interface MemberMenuProps {
@@ -7,7 +7,6 @@ interface MemberMenuProps {
   id: string;
   level: string;
   testdate: string;
-  setShowMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function MemberMenu(data: MemberMenuProps) {
